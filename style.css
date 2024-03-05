@@ -1,0 +1,193 @@
+body {
+  background-color: burlywood;
+}
+
+.container {
+  margin-top: 10px;
+}
+
+.card-grid {
+  display: grid;
+  grid-row-gap: 20px;
+  grid-template-columns: repeat(8, 1fr);
+  margin-top: 30px;
+}
+  
+.card {
+  position: relative;
+  width: 100px;
+  height: 150px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+  
+.card .card-inner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+}
+  
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+  
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+  
+.card-front {
+  background-image: url(card.png);
+  border-radius: 6px;
+}
+  
+.card-back {
+  transform: rotateY(180deg);
+  background-color: antiquewhite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-size: 58px;
+}
+  
+button {
+  margin-top: 20px;
+  width: 160px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: burlywood;
+  color: black;
+  font-weight: bold;
+}
+
+button:hover {
+  box-shadow: 1px 1px 1px 1px;
+}
+  
+h1 {
+  text-align: center;
+  font-size: 64px;
+  font-weight: bolder;
+}
+  
+h6 {
+  text-align: center;
+  font-size: 32px;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+#menu_button {
+  width: 200px;
+  height: 50px;
+  font-size: 22px;
+  font-weight: 100px;
+  background-color: blanchedalmond;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: black;
+}
+
+.background {
+  background-color: #2f2f2f;
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#menu_container {
+  margin-top: 50px;
+}
+
+.instruction {
+  width: 800px;
+}
+
+.instruction_text {
+  font-size: 22px;
+}
+
+.game_buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+  
+.emoji {
+  font-size: 4px;
+  position: absolute;
+  top: 80vh;
+  left: 45vw;
+  width: 6px;
+  height: 6px;
+  transform-origin: top left;
+  transform: scale(0) rotate(0deg) translate(-50%, -50%);
+  -webkit-animation: emoji 6s ease-in forwards infinite;
+  animation: emoji 6s ease-in forwards infinite;
+}
+
+.emoji:nth-child(2) {
+  -webkit-animation-delay: 1s;
+  animation-delay: 1s;
+  left: 25vw;
+  top: 40vh;
+}
+
+.emoji:nth-child(3) {
+  -webkit-animation-delay: 2s;
+  animation-delay: 2s;
+  left: 75vw;
+  top: 50vh;
+}
+
+.emoji:nth-child(4) {
+  -webkit-animation-delay: 3s;
+  animation-delay: 3s;
+  left: 90vw;
+  top: 10vh;
+}
+
+.emoji:nth-child(5) {
+  -webkit-animation-delay: 4s;
+  animation-delay: 4s;
+  left: 10vw;
+  top: 85vh;
+}
+
+@-webkit-keyframes emoji {
+  from {
+    transform: scale(0) rotate(0deg) translate(-50%, -50%);
+    opacity: 1;
+  }
+  to {
+    transform: scale(20) rotate(960deg) translate(-50%, -50%);
+    opacity: 0;
+  }
+}
+
+@keyframes emoji {
+  from {
+    transform: scale(0) rotate(0deg) translate(-50%, -50%);
+    opacity: 1;
+  }
+  to {
+    transform: scale(20) rotate(960deg) translate(-50%, -50%);
+    opacity: 0;
+  }
+}

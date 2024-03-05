@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>Игра на память</h1>
+            <h6>- Версия с Эмоджи -</h6>
+            <div class="card-grid">
+              <div v-for="(card, index) in cards" :key="index" class="card" :class="{ flipped: card.flipped }" @click="flipCard(index)">
+                <div class="card-inner">
+                  <div class="card-front"></div>
+                  <div class="card-back">{{ card.value }}</div>
+                </div>
+              </div>
+            </div>
+            <div class="game_buttons">
+                <button><a href="menu.html">Назад</a></button>
+                <button @click="restartGame" style="margin-left: 20px;">Начать заново</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    cards: [
+                        { value: "😀", flipped: false },
+                        { value: "😀", flipped: false },
+                        { value: "🤣", flipped: false },
+                        { value: "🤣", flipped: false },
+                        { value: "😇", flipped: false },
+                        { value: "😇", flipped: false },
+                        { value: "😍", flipped: false },
+                        { value: "😍", flipped: false },
+                        { value: "🤗", flipped: false },
+                        { value: "🤗", flipped: false },
+                        { value: "🤐", flipped: false },
+                        { value: "🤐", flipped: false },
+                        { value: "😷", flipped: false },
+                        { value: "😷", flipped: false },
+                        { value: "🥶", flipped: false },
+                        { value: "🥶", flipped: false },
+                        { value: "😎", flipped: false },
+                        { value: "😎", flipped: false },
+                        { value: "😭", flipped: false },
+                        { value: "😭", flipped: false },
+                        { value: "🤡", flipped: false },
+                        { value: "🤡", flipped: false },
+                        { value: "😺", flipped: false },
+                        { value: "😺", flipped: false }
+                    ],
+                    flippedCards: [],
+                };
+            },
+            methods: {
+                flipCard(index) {
+                    if (this.cards[index].flipped) return;
+                    this.cards[index].flipped = true;
+                    this.flippedCards.push(index);
+
+                    if (this.flippedCards.length === 2) {
+                        const card1 = this.cards[this.flippedCards[0]];
+                        const card2 = this.cards[this.flippedCards[1]];
+
+                        if (card1.value !== card2.value) {
+                            setTimeout(() => {
+                                card1.flipped = false;
+                                card2.flipped = false;
+                                this.flippedCards = [];
+                            }, 1000);
+                        }
+                        else {
+                            this.flippedCards = [];
+                            if(this.cards.every((card) => card.flipped)) {
+                                this.completed = true;
+                            }
+                        }
+                    }
+                },
+                restartGame() {
+                    this.cards.forEach(card => {
+                        card.flipped = false;
+                        card.matched = false;
+                    });
+                    this.gameOver = false;
+                    this.shuffleCards();
+                },
+                shuffleCards() {
+                    for (let i = this.cards.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        const temp = this.cards[i];
+                        this.cards[i] = this.cards[j];
+                        this.cards[j] = temp;
+                    }
+                },
+            },
+            mounted() {
+                this.shuffleCards();
+            }
+            // это хук жизненного цикла Vue 3, который вызывается после того,
+            // как элемент Vue был смонтирован в DOM. Он предоставляет возможность
+            // выполнить код после того, как компонент полностью отображен на странице
+        });
+        app.mount("#app");
+    </script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
